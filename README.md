@@ -1,39 +1,62 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+[![License: LGPL v3](https://img.shields.io/badge/License-LGPL_v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
+[![pub package](https://img.shields.io/pub/v/nostr.svg)](https://pub.dartlang.org/packages/plausible)
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+# dart-plausible
+Simple package to send analytics to `plausible.io` or your `self-hosted` server
+No unnecessary dependencies, package `http` only
 
 ## Features
+- [x] pageview
+- [x] goals / custom events
+- [x] custom events with props
+- [x] User-Agent
+- [x] X-Forwarded-For
+- [ ] referrer (You can contribute)
+- [ ] revenue
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+```sh
+flutter pub add plausible
+# OR
+  dart pub add plausible
+```
+
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
-
 ```dart
-const like = 'sample';
+import 'package:plausible/plausible.dart';
+
+void main() async {
+  const domain = 'ethicnology.com';
+
+  final analytics = Plausible(domain: domain);
+
+  // Send a `pageview` event of the page https://[domain]/about
+  analytics.send(path: '/about');
+
+  // Save the custom event `my-event` with the props key `anything` and the value `you want`
+  // The goal/event `my-event` must be created before on your plausible dashboard
+  analytics.send(event: 'my-event', props: {'anything': 'you want'});
+
+  // Define a `User-Agent`: (Useful for CLI, Desktop and Mobiles)
+  // Flutter web handle `User-Agent` by itself, and will override this configuration
+  // On other platforms I recommand you to use `device_info_plus` package to collect the `userAgent`
+  // https://pub.dev/packages/device_info_plus
+  analytics.userAgent =
+      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36';
+
+  // Send a `pageview` with the fake User-Agent
+  analytics.send(path: '/about');
+
+  // Disable analytics
+  analytics.isActive = false;
+
+  // Send a `pageview` will fail: `Plausible.isActive is set to false`
+  analytics.send(path: '/about');
+}
+
 ```
-
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
