@@ -1,14 +1,13 @@
 name: plausible
-description: A starting point for Dart libraries or applications.
+description: Use plausible analytics with Dart and Flutter
 version: 1.0.0
-# repository: https://github.com/my_org/my_repo
+repository: https://github.com/ethicnology/dart-plausible
 
 environment:
   sdk: ^3.2.3
 
-# Add regular dependencies here.
 dependencies:
-  # path: ^1.8.0
+  http: ^1.2.0
 
 dev_dependencies:
   lints: ^2.1.0
