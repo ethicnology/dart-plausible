@@ -1,8 +1,11 @@
 import 'package:plausible/plausible.dart';
 
 void main() async {
+  // Create your own domain using plausible dashboard
   const domain = 'ethicnology.com';
 
+  // Instantiate the Plausible analytics object
+  // Take a look at the multiples optionals settings
   final analytics = Plausible(domain: domain);
 
   // Send a `pageview` event of the page https://[domain]/about

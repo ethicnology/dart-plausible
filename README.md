@@ -1,5 +1,5 @@
 [![License: LGPL v3](https://img.shields.io/badge/License-LGPL_v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
-[![pub package](https://img.shields.io/pub/v/nostr.svg)](https://pub.dartlang.org/packages/plausible)
+[![pub package](https://img.shields.io/pub/v/plausible.svg)](https://pub.dartlang.org/packages/plausible)
 
 # dart-plausible
 Simple package to send analytics to `plausible.io` or your `self-hosted` server
@@ -31,8 +31,11 @@ flutter pub add plausible
 import 'package:plausible/plausible.dart';
 
 void main() async {
+  // Create your own domain using plausible dashboard
   const domain = 'ethicnology.com';
 
+  // Instantiate the Plausible analytics object
+  // Take a look at the multiples optionals settings
   final analytics = Plausible(domain: domain);
 
   // Send a `pageview` event of the page https://[domain]/about
