@@ -50,7 +50,7 @@ class Plausible {
   /// - props   : null
   Future<void> send({
     String event = 'pageview',
-    String path = '',
+    String path = '/',
     Map<String, dynamic>? props,
   }) async {
     if (!isActive) {
@@ -63,13 +63,16 @@ class Plausible {
       if (userAgent != null) headers['User-Agent'] = userAgent!;
       if (xForwardedFor != null) headers['X-Forwarded-For'] = xForwardedFor!;
 
-      url ??= Uri.https(domain, path);
+      final resolved = url ?? Uri.https(domain, path);
+      final basePath = resolved.path.isNotEmpty ? resolved.path : '/';
+      final eventUrl =
+          resolved.hasQuery ? '$basePath?${resolved.query}' : basePath;
 
       final body = jsonEncode({
         'name': event,
         'domain': domain,
         'props': props,
-        'url': url.toString(),
+        'url': eventUrl,
       });
 
       await post(server, headers: headers, body: body);
