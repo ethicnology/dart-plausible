@@ -2,11 +2,16 @@ import 'package:plausible/plausible.dart';
 
 void main() async {
   // Create your own domain using plausible dashboard
-  const domain = 'plausible.io';
+  const domain = 'example.com';
 
   // Instantiate the Plausible analytics object
   // Take a look at the multiples optionals settings
-  final analytics = Plausible(domain: domain);
+  final analytics = Plausible(
+    domain: domain,
+    // For self-hosted plausible instance, you can also pass your own server URL
+    //  server: Uri.http('localhost:8000', '/api/event'),
+    //  server: Uri.https('your-self-hosted-plausible-instance.com', '/api/event'),
+  );
 
   // Send a `pageview` event of the page https://[domain]/about
   analytics.send(path: '/ethicnology');
