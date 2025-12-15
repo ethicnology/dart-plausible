@@ -1,14 +1,14 @@
 name: plausible
-description: Use plausible analytics with Dart and Flutter
-version: 1.0.0
+description: A lightweight Dart package for Plausible Analytics integration. Send pageviews, custom events with props, and track analytics on plausible.io or self-hosted instances. Works with Flutter, CLI, and Dart applications.
+version: 1.0.1
 repository: https://github.com/ethicnology/dart-plausible
 
 environment:
   sdk: ^3.2.3
 
 dependencies:
-  http: ^1.2.0
+  http: ^1.6.0
 
 dev_dependencies:
-  lints: ^2.1.0
+  lints: ^6.0.0
   test: ^1.24.0
